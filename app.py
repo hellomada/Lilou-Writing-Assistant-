@@ -1,15 +1,11 @@
 import streamlit as st
 from openai import OpenAI
-import os
 from utils import split_text_into_chunks, read_docx, read_pdf, save_to_docx
 
 # --- Load API key from secrets.txt ---
 def load_api_key():
     with open("secrets.txt", "r") as f:
-        for line in f:
-            if line.startswith("OPENAI_KEY="):
-                return line.split("=", 1)[1].strip()
-    raise ValueError("No OPENAI_KEY found in secrets.txt")
+        return f.read().strip()  # just the raw key, no "OPENAI_KEY=" prefix
 
 api_key = load_api_key()
 
