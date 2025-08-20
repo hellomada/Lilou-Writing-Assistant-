@@ -1,17 +1,19 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 import os
 from utils import split_text_into_chunks, read_docx, read_pdf, save_to_docx
 
-# Load API key
-openai.api_key = os.getenv("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")
+# Initialize OpenAI client
+client = OpenAI(api_key=os.getenv("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))
 
-st.title("📖 Novel Formatter with AI")
+st.set_page_config(page_title="Novel Formatter", layout="wide")
+st.title("📖 Novel Formatter with AI for Lilou")
 st.write("Upload your manuscript and get a fully formatted version (APA, Chicago, Novel style, etc.).")
 
 # Style choice
 style = st.selectbox("Choose formatting style:", ["APA", "Chicago", "MLA", "Novel (Publisher-ready)"])
 
+# File upload
 uploaded_file = st.file_uploader("Upload your manuscript (.docx or .pdf)", type=["docx", "pdf"])
 
 if uploaded_file:
@@ -39,16 +41,18 @@ if uploaded_file:
             {chunk}
             """
 
-            response = openai.ChatCompletion.create(
-                model="gpt-4o-mini",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0
-            )
+            try:
+                response = client.chat.completions.create(
+                    model="gpt-4o-mini",   # You can also try gpt-4.1 or gpt-4o for better quality
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0
+                )
+                formatted_text = response.choices[0].message.content
+            except Exception as e:
+                formatted_text = f"[Error processing section {i+1}: {e}]"
 
-            formatted_text = response.choices[0].message["content"]
             formatted_sections.append(formatted_text)
-
-            progress.progress((i+1)/len(chunks))
+            progress.progress((i + 1) / len(chunks))
 
         st.success("✅ Formatting complete!")
 
