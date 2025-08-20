@@ -3,9 +3,20 @@ from openai import OpenAI
 import os
 from utils import split_text_into_chunks, read_docx, read_pdf, save_to_docx
 
-# Initialize OpenAI client
-client = OpenAI(api_key=os.getenv("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))
+# --- Load API key from secrets.txt ---
+def load_api_key():
+    with open("secrets.txt", "r") as f:
+        for line in f:
+            if line.startswith("OPENAI_KEY="):
+                return line.split("=", 1)[1].strip()
+    raise ValueError("No OPENAI_KEY found in secrets.txt")
 
+api_key = load_api_key()
+
+# Initialize OpenAI client
+client = OpenAI(api_key=api_key)
+
+# --- Streamlit UI ---
 st.set_page_config(page_title="Novel Formatter", layout="wide")
 st.title("📖 Novel Formatter with AI for Lilou")
 st.write("Upload your manuscript and get a fully formatted version (APA, Chicago, Novel style, etc.).")
@@ -43,7 +54,7 @@ if uploaded_file:
 
             try:
                 response = client.chat.completions.create(
-                    model="gpt-4o-mini",   # You can also try gpt-4.1 or gpt-4o for better quality
+                    model="gpt-4o-mini",
                     messages=[{"role": "user", "content": prompt}],
                     temperature=0
                 )
