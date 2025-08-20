@@ -22,7 +22,7 @@ st.markdown("""
 4. Name it whatever
 5. Copy the key (starts with `sk-`) and keep it safe  
 
-**Step 2: Enter your API Key below**
+**Step 2: Enter your API Key below**  
 
 You're welcome love! ♥ 
 """)
@@ -35,7 +35,7 @@ api_key = st.text_input(
 )
 
 if not api_key:
-    st.info("⚠️ Please enter your OpenAI API key to continue. You can get one here: [OpenAI API Keys](https://platform.openai.com/account/api-keys)")
+    st.info("⚠️ Please enter your OpenAI API key to continue.")
     st.stop()
 
 # --- Initialize OpenAI client ---
@@ -93,13 +93,16 @@ Section:
 
         # Save to Word
         output_file = save_to_docx(formatted_sections)
+        
+        # Button to download fully formatted novel
         with open(output_file, "rb") as f:
             st.download_button(
-                "⬇️ Download Final Formatted Novel",
+                "⬇️ Download Fully Formatted Novel",
                 f,
                 file_name="Formatted_Novel.docx"
             )
 
         # Display preview
-        st.subheader("Preview of Formatted Text")
-        st.write("\n\n".join(formatted_sections[:2]))  # show first 2 sections as preview
+        st.subheader("Preview of Formatted Text (First 2 Sections)")
+        st.write("\n\n".join(formatted_sections[:2]))
+        st.info("📥 You can download the full formatted novel using the button above.")
