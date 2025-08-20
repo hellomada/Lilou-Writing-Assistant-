@@ -13,6 +13,17 @@ Upload your manuscript and get a **fully polished and formatted version**
 The text will be corrected for grammar, punctuation, quotations, indentation, and formatting **without changing the meaning or tone**.
 """)
 
+# Step-by-step API key instructions
+st.markdown("""
+**Step 1: Get your OpenAI API Key**  
+1. Go to [OpenAI API Keys](https://platform.openai.com/account/api-keys)  
+2. Sign in or create an account  
+3. Click **Create new secret key**  
+4. Copy the key (starts with `sk-`) and keep it safe  
+
+**Step 2: Enter your API Key below**
+""")
+
 # --- Ask for API Key from User ---
 api_key = st.text_input(
     "Enter your OpenAI API Key:",
