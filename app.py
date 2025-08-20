@@ -19,9 +19,12 @@ st.markdown("""
 1. Go to [OpenAI API Keys](https://platform.openai.com/account/api-keys)  
 2. Sign in or create an account  
 3. Click **Create new secret key**  
-4. Copy the key (starts with `sk-`) and keep it safe  
+4. Name it whatever
+5. Copy the key (starts with `sk-`) and keep it safe  
 
 **Step 2: Enter your API Key below**
+
+You're welcome love! ♥ 
 """)
 
 # --- Ask for API Key from User ---
