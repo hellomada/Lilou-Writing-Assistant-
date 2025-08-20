@@ -6,7 +6,7 @@ from utils import split_text_into_chunks, read_docx, read_pdf, save_to_docx
 st.set_page_config(page_title="📖 Novel Formatter with AI", layout="wide")
 
 st.title("📖 Novel Formatter with AI for Lilou")
-st.write("A gift from your amazing BF 😉")
+st.markdown("**A gift from your amazing BF 😉**")
 st.write("""
 Upload your manuscript and get a **fully polished and formatted version** 
 (APA, Chicago, MLA, or Novel style) with proper headings, spacing, and paragraph breaks.
