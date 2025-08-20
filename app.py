@@ -4,7 +4,7 @@ import os
 from utils import split_text_into_chunks, read_docx, read_pdf, save_to_docx
 
 # Load API key
-openai.api_key = os.getenv("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")
+openai.api_key = os.getenv("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")
 
 st.title("📖 Novel Formatter with AI")
 st.write("Upload your manuscript and get a fully formatted version (APA, Chicago, Novel style, etc.).")
